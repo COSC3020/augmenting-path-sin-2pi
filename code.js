@@ -24,19 +24,8 @@ function augmentingPath(graph, start, end) {
       return currentPath;
     }
 
-    let unknownNeighbors = false;
 
-    // I think two checks is okay for efficiency and avoiding unnecessary processing. Is this okay or just unnecessary?
     if (graph[current]) {
-      for (let next in graph[current]) {
-        if (!discovered.includes(next)) {
-          unknownNeighbors = true;
-          break;
-        }
-      }
-    }
-
-    if (graph[current] && unknownNeighbors) {
       for (let next in graph[current]) {
         if (!discovered.includes(next)) {
           nodes.push(next);
