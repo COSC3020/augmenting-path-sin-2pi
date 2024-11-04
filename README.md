@@ -32,3 +32,8 @@ accordingly.
 
 What is the worst-case big $\Theta$ complexity of your implementation? Add your
 answer, including your reasoning, to this markdown file.
+
+
+**Sources**
+
+Looked at [this](https://github.com/COSC3020/augmenting-path-NolanNachbar/blob/NolanNachbar-patch-1/code.js) repo for inspiration. My implementation is iterative, not recursive.
