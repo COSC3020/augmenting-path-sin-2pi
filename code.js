@@ -1,38 +1,35 @@
+// I thought it would be easier to do asymptotic anaylsis if I implement it recursively.
+// My original was iterative
+
 function augmentingPath(graph, start, end) {
-  if (start === end) {
-    return [start];
+  seen = new Set();
+  path = [];
+  result = findPath(graph, start, end, seen, path);
+  if (result) {
+    return path;
+  } else {
+    return [];
+  }
+}
+
+function findPath(graph, current, end, seen, path) {
+  seen.add(current);
+  path.push(current);
+
+  if (current === end) {
+    return true;
   }
 
-  let discovered = [];
-  let nodePaths = [];
-
-  let nodes = [start];
-  nodePaths[start] = [start];
-
-  while (nodes.length > 0) {
-    current = nodes[0];
-    nodes = nodes.slice(1);
-
-    if (discovered.includes(current)) {
-      continue;
-    }
-    discovered.push(current);
-
-    currentPath = nodePaths[current];
-
-    if (current === end) {
-      return currentPath;
-    }
-
-
-    if (graph[current]) {
-      for (let next in graph[current]) {
-        if (!discovered.includes(next)) {
-          nodes.push(next);
-          nodePaths[next] = currentPath.concat(next);
-        }
+  const neighbors = graph[current] || {};
+  for (adjacent in neighbors) {
+    capacity = neighbors[adjacent];
+    if (!seen.has(adjacent) && capacity > 0) {
+      if (findPath(graph, adjacent, end, seen, path)) {
+        return true;
       }
     }
   }
-  return [];
+
+  path.pop();
+  return false;
 }
